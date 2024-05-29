@@ -1,0 +1,15 @@
+{
+    "name": "admin/xuong_oop",
+    "autoload": {
+        "psr-4": {
+            "Admin\\XuongOop\\": "src/"
+        }
+    },
+    "require": {
+        "bramus/router": "~1.6",
+        "eftec/bladeone": "^4.13",
+        "doctrine/dbal": "^4.0",
+        "rakit/validation": "^1.4",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
