@@ -1,12 +1,15 @@
 <?php
 
 // Website có các trang
-    // Trang chu
-    // 
+    // Trang chủ
+    // Giới thiệu
+    // Danh sách sản phẩm
+    // Chi tiết sản phẩm
+    // Liên hệ
 
 // Để định nghĩa đc. Phải tạo controller trc
-// Tiếp theo khai báo function tương tự tự để xử lý
-// Định nghĩa đường dẫn
+// Tiếp theo khai báo function tương ứng để xử lý
+// Cuối cùng, định nghĩa đường dẫn
 
 // HTTP Method: get, post, put (path), delete, option, head
 
@@ -19,7 +22,7 @@ $router->get( "/",                  HomeController::class    . '@index');
 $router->get( "/about",             AboutController::class   . '@index');
 
 $router->get( "/contact",           ContactController::class . '@index');
-$router->post( "/contact/store",    ContactController::class . '@index');
+$router->post( "/contact/store",    ContactController::class . '@store');
 
 $router->get( "/products",          ProductController::class . '@index');
 $router->get( "/products/{id}",     ProductController::class . '@detail');

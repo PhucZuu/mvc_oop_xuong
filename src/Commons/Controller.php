@@ -1,6 +1,7 @@
 <?php
 
 namespace Admin\XuongOop\Commons;
+
 use eftec\bladeone\BladeOne;
 
 class Controller
@@ -17,7 +18,7 @@ class Controller
 
     protected function renderAdminClient($view, $data)
     {
-        $templatePath = __DIR__ . '/../Views/Client';
+        $templatePath = __DIR__ . '/../Views/Admin';
         $compiledPath = __DIR__ . '/../Views/Compiles';
 
         $blade = new BladeOne($templatePath, $compiledPath);

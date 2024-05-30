@@ -6,6 +6,6 @@
     <title>Home</title>
 </head>
 <body>
-    <h1>HOME</h1>
+    <h1>WELCOME {{ $name }} TO MY WEBSITE</h1>
 </body>
 </html>

@@ -26,9 +26,10 @@ class Model
         $this->queryBuilder = $this->conn->createQueryBuilder();
     }
 
+    // CRUD
     protected function all()
     {
-        
+        return $this->queryBuilder->select('*')->fetchAllAssociative();
     }
 
     protected function paginate($page, $perPage = 10 )

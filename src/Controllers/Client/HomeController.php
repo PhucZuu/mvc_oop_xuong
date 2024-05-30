@@ -1,6 +1,7 @@
 <?php
 
 namespace Admin\XuongOop\Controllers\Client;
+
 use Admin\XuongOop\Commons\Controller;
 use Admin\XuongOop\Commons\Helper;
 use Admin\XuongOop\Models\User;
