@@ -3,12 +3,26 @@
 namespace Admin\XuongOop\Controllers\Admin;
 
 use Admin\XuongOop\Commons\Controller;
+use Admin\XuongOop\Commons\Helper;
+use Admin\XuongOop\Models\User;
+
 
 class UserController extends Controller
 {
+    private User $user;
+
+    public function __construct()
+    {
+        $this->user = new User();
+    }
     public function index()
     {
-        echo __CLASS__ . "@" . __FUNCTION__;
+        [$users, $totalPage] = $this->user->paginate($_GET['page'] ?? 1);
+        
+        $this->renderViewAdmin('users.index', [
+            'users'=> $users,
+            'totalPage'=> $totalPage
+        ]);
     }
 
     public function store()
@@ -38,6 +52,9 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        echo __CLASS__ . "@" . __FUNCTION__ . ' - ID = ' . $id;
+        $this->user->delete($id);
+
+        header('Location: ' . url('admin/users'));
+        exit();
     }
 }
