@@ -282,7 +282,7 @@
                                 <li class="list-inline-item">
                                     <!-- Tiêu đề -->
                                     <h5>
-                                        <a href="">
+                                        <a href="{{ url("{$news['id']}/news-details") }}">
                                             {{$news['title']}}
                                         </a>
                                     </h5>
