@@ -39,3 +39,6 @@
 <script src="{{ asset('assets/admin/vendors/chart_am/chart-custom.js') }}"></script>
 <script src="{{ asset('assets/admin/js/dashboard_init.js') }}"></script>
 <script src="{{ asset('assets/admin/js/custom.js') }}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>

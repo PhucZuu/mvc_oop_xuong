@@ -1,54 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('title')
+    Phân quyền người dùng
+@endsection
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Cập nhật người dùng</title>
-</head>
+@section('content')
 
-<body>
-    <h1>Cập nhật người dùng: {{ $user['name'] }}</h1>
+<div class="row justify-content-center">
+    <div class="col-lg-12">
+        <div class="white_card card_height_100 mb_30">
+            <div class="white_card_header">
+                <div class="box_header m-0">
+                    <div class="main-title">
+                        <h2 class="m-0">Phân quyền người dùng</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="white_card_body">
 
-    @if (!empty($_SESSION['errors']))
-        <div class="alert alert-warning">
-            <ul>
-                @foreach ($_SESSION['errors'] as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
+                @if (!empty($_SESSION['errors']))
+                    <div class="alert alert-warning">
+                        <ul>
+                            @foreach ($_SESSION['errors'] as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+            
+                        @php
+                            unset($_SESSION['errors']);
+                        @endphp
+                    </div>
+                @endif
 
-            @php
-                unset($_SESSION['errors']);
-            @endphp
+                <div class="table-responsive">
+                    <form action="{{ url("admin/users/{$user['id']}/update") }}" enctype="multipart/form-data" method="POST">
+                        <div class="mb-3 mt-3">
+                            <label for="name" class="form-label">Quyền:</label>
+                            <select name="role" id="">
+                                <option value="0" <?= $user['role'] == 0 ? "selected" : "" ?>>Người dùng</option>
+                                <option value="1" <?= $user['role'] == 1 ? "selected" : "" ?>>Quản trị</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Cập nhật</button>
+                    </form>
+                </div>
+            </div>
         </div>
-    @endif
+    </div>
+</div>
 
-    <form action="{{ url("admin/users/{$user['id']}/update") }}" enctype="multipart/form-data" method="POST">
-        <div class="mb-3 mt-3">
-            <label for="name" class="form-label">Name:</label>
-            <input type="text" class="form-control" value="{{ $user['name'] }}" id="name" placeholder="Enter name" name="name">
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="email" class="form-label">Email:</label>
-            <input type="email" class="form-control" value="{{ $user['email'] }}" id="email" placeholder="Enter email" name="email">
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="avatar" class="form-label">Avatar:</label>
-            <input type="file" class="form-control" value="" id="avatar" placeholder="Enter avatar" name="avatar">
-            <img width="100px" src="{{ asset($user['avatar']) }}" alt="">
-        </div>
-        <div class="mb-3 mt-3">
-            <label for="password" class="form-label">Password:</label>
-            <input type="password" class="form-control" value="" id="name" placeholder="Enter password" name="password">
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
-</body>
-
-</html>
+@endsection

@@ -17,4 +17,26 @@ class User extends Model
         ->setParameter(0, $email)
         ->fetchAssociative();
     }
+
+    public function paginate($page = 1, $perPage = 5 )
+    {
+        $queryBuilder = clone($this->queryBuilder);
+
+        $totalPage = ceil($this->count() / $perPage);
+
+        $offset = $perPage * ($page - 1);
+
+        $data = $queryBuilder
+        ->select('*')
+        ->from($this->tableName)
+        ->setFirstResult($offset)
+        ->setMaxResults($perPage)
+        ->where('active = ?')
+        ->setParameter(0, 1)
+        ->orderBy('id','desc')
+        ->fetchAllAssociative();
+
+        return [$data, $totalPage];
+    }
+
 }

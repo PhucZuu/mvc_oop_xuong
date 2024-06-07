@@ -6,7 +6,7 @@
         </div>
     </div>
     <ul id="sidebar_menu">
-        <li class="mm-active">
+        {{-- <li class="mm-active">
             <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('assets/admin/img/menu-icon/dashboard.svg') }}" alt>
@@ -18,16 +18,61 @@
                 <li><a href="index_2.html">Default</a></li>
                 <li><a href="index_3.html">Dark Menu</a></li>
             </ul>
-        </li>
+        </li> --}}
 
         <li class>
-            <a href="Board.html" aria-expanded="false">
+            <a href="{{ url('admin/') }}" aria-expanded="false">
                 <div class="icon_menu">
-                    <img src="{{ asset('assets/admin/img/menu-icon/5.svg') }}" alt>
+                    <img src="{{ asset('assets/admin/img/menu-icon/dashboard.svg') }}" alt>
                 </div>
-                <span>Board</span>
+                <span>Dashboard</span>
             </a>
         </li>
 
+
+        <li class="mm-active">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/2.svg') }}" alt>
+                </div>
+                <span>Danh mục</span>
+            </a>
+            <ul>
+                <li><a class="active" href="{{ url('admin/categories/') }}">Danh sách</a></li>
+                <li><a href="{{ url('admin/categories/create') }}">Thêm</a></li>
+            </ul>
+        </li>
+
+        <li class="mm-active">
+            <a class="has-arrow" href="#" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/4.svg') }}" alt>
+                </div>
+                <span>Tin tức</span>
+            </a>
+            <ul>
+                <li><a class="active" href="{{ url('admin/news/') }}">Danh sách</a></li>
+                <li><a href="{{ url('admin/news/create') }}">Thêm</a></li>
+            </ul>
+        </li>
+
+
+        <li class>
+            <a href="{{ url('admin/users/') }}" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/user.svg') }}" alt>
+                </div>
+                <span>Người dùng</span>
+            </a>
+        </li>
+
+        <li class>
+            <a href="{{ url() }}" aria-expanded="false">
+                <div class="icon_menu">
+                    <img src="{{ asset('assets/admin/img/menu-icon/12.svg') }}" alt>
+                </div>
+                <span>Thoát</span>
+            </a>
+        </li>
     </ul>
 </nav>

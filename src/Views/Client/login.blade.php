@@ -1,49 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Latest compiled and minified CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+@section('content')
+    <div class="card mx-auto" style="max-width:520px;">
+        @if (!empty($_SESSION['error']))
+            <div class="alert alert-warning mt-3 mb-3">
+                {{ $_SESSION['error'] }}
+            </div>
 
-    <!-- Latest compiled JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>Login</title>
-</head>
-
-<body>
-
-    <div class="container">
-        <h1 class="mt-5 mb-3 text-center">Login</h1>
-        
-            @if (!empty($_SESSION['error']))
-                <div class="alert alert-warning mt-3 mb-3">
-                    {{ $_SESSION['error']}}
+            @php
+                unset($_SESSION['error']);
+            @endphp
+        @endif
+        <article class="card-body">
+            <header class="mb-4">
+                <h4 class="card-title">Sign in</h4>
+            </header>
+            <form action="{{ url('handle-login') }}" method="POST">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" class="form-control" name="email" placeholder="">
                 </div>
-
-                @php
-                    unset($_SESSION['error']);
-                @endphp
-            @endif
-       
-        <div class="row">
-            <form action="{{ url('handle-login') }}" method="post">
-                <div class="mb-3 mt-3">
-                    <label for="email" class="form-label">Email:</label>
-                    <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
+                <div class="form-group">
+                    <label>Mật khẩu</label>
+                    <input type="password" class="form-control" name="password" placeholder="">
                 </div>
-                <div class="mb-3">
-                    <label for="pwd" class="form-label">Password:</label>
-                    <input type="password" class="form-control" id="pwd" placeholder="Enter password"
-                        name="password">
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary btn-block"> Login </button>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-        </div>
+        </article>
     </div>
+@endsection
 
-</body>
-
-</html>

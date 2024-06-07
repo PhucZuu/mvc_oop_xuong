@@ -18,14 +18,36 @@ if(!function_exists("url"))
     }
 }
 
-
-if(!function_exists("auth_check"))
+if(!function_exists("is_logged"))
 {
-    function auth_check()
+    function is_logged()
     {
-        if (isset($_SESSION['user'])) {
-            header('Location: ' . url('admin/'));
-            exit;
+        return isset($_SESSION["user"]);
+    }
+}
+
+if(!function_exists("is_admin"))
+{
+    function is_admin()
+    {
+        return isset($_SESSION["user"]) && $_SESSION['user']['role'] == 1;
+    }
+}
+
+if(!function_exists("avoid_login"))
+{
+    function avoid_login()
+    {
+        if(is_logged())
+        {
+            if(is_admin())
+            {
+                header('Location: ' . url('admin/'));
+                exit;
+            }
+
+            header('Location: '. url());
         }
+
     }
 }

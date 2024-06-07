@@ -17,3 +17,11 @@
 <link rel="stylesheet" href="{{ asset('assets/admin/css/metisMenu.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/admin/css/style1.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/admin/css/colors/default.css') }}" id="colorSkinCSS">
+
+
+<style>
+    .ck-editor__editable[role="textbox"] {
+        /* Editing area */
+        min-height: 10rem;
+    }
+</style>

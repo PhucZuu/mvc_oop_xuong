@@ -37,6 +37,8 @@ class Model
         return $this->queryBuilder
         ->select('*')
         ->from($this->tableName)
+        ->where('active = ?')
+        ->setParameter(0, 1)
         ->orderBy('id','desc')
         ->fetchAllAssociative();
     }
@@ -62,6 +64,8 @@ class Model
         ->from($this->tableName)
         ->setFirstResult($offset)
         ->setMaxResults($perPage)
+        ->where('active = ?')
+        ->setParameter(0, 1)
         ->orderBy('id','desc')
         ->fetchAllAssociative();
 

@@ -41,65 +41,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_thumb">
-                                            <a href="#"><img src="{{ asset('assets/admin/img/staf/4.png') }}" alt></a>
-                                        </div>
-                                        <div class="notify_content">
-                                            <a href="#">
-                                                <h5>Awesome packages</h5>
-                                            </a>
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_thumb">
-                                            <a href="#"><img src="{{ asset('assets/admin/img/staf/3.png') }}" alt></a>
-                                        </div>
-                                        <div class="notify_content">
-                                            <a href="#">
-                                                <h5>what a packages</h5>
-                                            </a>
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_thumb">
-                                            <a href="#"><img src="{{ asset('assets/admin/img/staf/2.png') }}" alt></a>
-                                        </div>
-                                        <div class="notify_content">
-                                            <a href="#">
-                                                <h5>Cool Marketing </h5>
-                                            </a>
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_thumb">
-                                            <a href="#"><img src="{{ asset('assets/admin/img/staf/4.png') }}" alt></a>
-                                        </div>
-                                        <div class="notify_content">
-                                            <a href="#">
-                                                <h5>Awesome packages</h5>
-                                            </a>
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
-
-                                    <div class="single_notify d-flex align-items-center">
-                                        <div class="notify_thumb">
-                                            <a href="#"><img src="{{ asset('assets/admin/img/staf/3.png') }}" alt></a>
-                                        </div>
-                                        <div class="notify_content">
-                                            <a href="#">
-                                                <h5>what a packages</h5>
-                                            </a>
-                                            <p>Lorem ipsum dolor sit amet</p>
-                                        </div>
-                                    </div>
                                 </div>
                                 <div class="nofity_footer">
                                     <div class="submit_button text-center pt_20">
@@ -115,16 +56,22 @@
                         </li>
                     </div>
                     <div class="profile_info">
-                        <img src="{{ asset('assets/admin/img/client_img.png') }}" alt="#">
+                        @if (isset($_SESSION['user']) && isset($_SESSION['user']['avatar']))
+                            <img height="30px" width="30px" src="{{ asset($_SESSION['user']['avatar']) }}" alt="#">  
+                        @else
+                            <img height="30px" width="30px" src="{{ asset('assets/admin/img/avatardefault.jpg') }}" alt="#">  
+                        @endif
                         <div class="profile_info_iner">
                             <div class="profile_author_name">
-                                <p>Neurologist </p>
-                                <h5>Dr. Robar Smith</h5>
+                                <p>Developer </p>
+                                <h5>{{$_SESSION['user']['name']}}</h5>
                             </div>
                             <div class="profile_info_details">
                                 <a href="#">My Profile </a>
                                 <a href="#">Settings</a>
-                                <a href="#">Log Out </a>
+                                <form action="{{ url('logout') }}" method="post">
+                                    <input type="submit" value="Log Out">
+                                </form>
                             </div>
                         </div>
                     </div>
