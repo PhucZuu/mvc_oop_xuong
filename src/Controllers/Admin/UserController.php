@@ -19,10 +19,10 @@ class UserController extends Controller
     public function index()
     {
         [$users, $totalPage] = $this->user->paginate($_GET['page'] ?? 1);
-        
+
         $this->renderViewAdmin('users.index', [
-            'users'=> $users,
-            'totalPage'=> $totalPage
+            'users' => $users,
+            'totalPage' => $totalPage
         ]);
     }
 
@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $user = $this->user->findById($id);
 
-        $this->renderViewAdmin('users.show',[
+        $this->renderViewAdmin('users.show', [
             'user' => $user
         ]);
     }
@@ -39,21 +39,20 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = $this->user->findById($id);
-        $this->renderViewAdmin('users.edit',[
-            'user'=> $user
+        $this->renderViewAdmin('users.edit', [
+            'user' => $user
         ]);
     }
 
     public function update($id)
     {
         $this->user->update($id, [
-            'role'=> $_POST['role'],
+            'role' => $_POST['role'],
         ]);
         $_SESSION['status'] = true;
         $_SESSION['msg'] = 'Thao tác thành công';
-        header('Location: '. url('admin/users'));
+        header('Location: ' . url('admin/users'));
         exit();
-        
     }
 
     public function banAcc($id)
@@ -64,7 +63,7 @@ class UserController extends Controller
 
         $_SESSION['status'] = true;
         $_SESSION['msg'] = 'Thao tác thành công';
-        header('Location: '. url('admin/users'));
+        header('Location: ' . url('admin/users'));
         exit();
     }
     public function delete($id)
@@ -74,7 +73,7 @@ class UserController extends Controller
 
         $_SESSION['status'] = true;
         $_SESSION['msg'] = 'Thao tác thành công';
-        header('Location: '. url('admin/users/listBanned'));
+        header('Location: ' . url('admin/users/listBanned'));
         exit();
     }
 
@@ -82,7 +81,7 @@ class UserController extends Controller
     {
         $users = $this->user->getAllUserBan();
         $this->renderViewAdmin('users.index', [
-            'users'=> $users
+            'users' => $users
         ]);
     }
 
@@ -94,7 +93,7 @@ class UserController extends Controller
 
         $_SESSION['status'] = true;
         $_SESSION['msg'] = 'Khôi phục thành công';
-        header('Location: '. url('admin/users/listBanned'));
+        header('Location: ' . url('admin/users/listBanned'));
         exit();
     }
 }

@@ -23,7 +23,7 @@ class LoginController extends Controller
     {
         avoid_login();
         $categories = $this->category->all();
-        $this->renderViewClient("login",[
+        $this->renderViewClient("login", [
             'categories' => $categories
         ]);
     }
@@ -34,16 +34,14 @@ class LoginController extends Controller
 
         try {
             $user = $this->user->findByEmail($_POST['email']);
-            if(empty($user)) 
-            {
+            if (empty($user)) {
                 throw new \Exception('Tài khoản hoặc mật khẩu không chính xác');
             }
             $flag = password_verify($_POST['password'], $user['password']);
 
-            if ($flag) 
-            {
+            if ($flag) {
                 $_SESSION['user'] = $user;
-                if($_SESSION['user']['role'] == 1){
+                if ($_SESSION['user']['role'] == 1) {
                     header('Location: ' . url('admin/'));
                     exit;
                 }
@@ -52,11 +50,10 @@ class LoginController extends Controller
                 exit;
             }
             throw new \Exception('Tài khoản hoặc mật khẩu không chính xác');
-
         } catch (\Throwable $th) {
             $_SESSION['error'] = $th->getMessage();
 
-            header('Location: '. url('login'));
+            header('Location: ' . url('login'));
             exit;
         }
     }
@@ -67,13 +64,13 @@ class LoginController extends Controller
 
         $categories = $this->category->all();
 
-        $this->renderViewClient('register',[
+        $this->renderViewClient('register', [
             'categories' => $categories
         ]);
     }
 
     public function register()
-    {   
+    {
         $validator = new Validator;
 
         $validator->setMessages([
@@ -91,24 +88,23 @@ class LoginController extends Controller
         ]);
 
         $validation->validate();
-        if ($validation->fails()) 
-        {
+        if ($validation->fails()) {
             $_SESSION['errors'] = $validation->errors()->firstOfAll();
 
             header('Location: ' . url('register'));
             exit();
-        }else{
+        } else {
 
             $uniqueEmail = $this->user->findByEmail($_POST['email']);
 
-            if(!$uniqueEmail){
+            if (!$uniqueEmail) {
 
                 $data = [
-                    'name'=> $_POST['name'],
-                    'email'=> $_POST['email'],
+                    'name' => $_POST['name'],
+                    'email' => $_POST['email'],
                     'password' => password_hash($_POST['password'], PASSWORD_DEFAULT),
                 ];
-    
+
                 $this->user->insert($data);
 
                 $_SESSION['status'] = true;
@@ -116,34 +112,30 @@ class LoginController extends Controller
 
                 header('Location: ' . url('register'));
                 exit();
-
-            }else{
+            } else {
 
                 $_SESSION['errors']['unique'] = "Email đã tồn tại";
                 header('Location: ' . url('register'));
                 exit();
-
             }
         }
     }
 
     public function showAccount()
     {
-        if(isset($_SESSION['user'])){
+        if (isset($_SESSION['user'])) {
 
             $categories = $this->category->all();
             $user = $this->user->findById($_SESSION['user']['id']);
 
-            $this->renderViewClient('editaccount',[
+            $this->renderViewClient('editaccount', [
                 'user'       => $user,
                 'categories' => $categories
             ]);
-
-        }else{
+        } else {
 
             header('Location: ' . url('login'));
             exit;
-
         }
     }
 
@@ -170,53 +162,46 @@ class LoginController extends Controller
 
         $validation->validate();
 
-        if($validation->fails())
-        {
+        if ($validation->fails()) {
             $_SESSION['errors'] = $validation->errors()->firstOfAll();
 
             header('Location: ' . url("{$id}/myaccount"));
             exit;
-        }else{
-            if($_POST['email'] == $user['email']){
+        } else {
+            if ($_POST['email'] == $user['email']) {
 
                 $uniqueEmail = false;
+            } else {
 
-            }else{
-                
                 $uniqueEmail = (new User)->findByEmail($_POST['email']);
-
             }
 
             // check unique email
-            if(!$uniqueEmail)
-            {
+            if (!$uniqueEmail) {
                 $data = [
                     'name'       => $_POST['name'],
                     'email'      => $_POST['email'],
                     'password'   => !empty($_POST['password']) ? password_hash($_POST['password'], PASSWORD_DEFAULT) : $user['password'],
                     'updated_at' => date("Y-m-d h:i:s")
                 ];
-                
-                
+
+
 
                 $flagUpload = false;
                 // check upload file
-                if(isset($_FILES['avatar']) && $_FILES['avatar']['size'] > 0)
-                {
+                if (isset($_FILES['avatar']) && $_FILES['avatar']['size'] > 0) {
                     $flagUpload = true;
-    
+
                     $from = $_FILES['avatar']['tmp_name'];
                     $to = 'assets/uploads/' . time() . $_FILES['avatar']['name'];
-    
-                    if(move_uploaded_file($from, PATH_ROOT . $to))
-                    {
+
+                    if (move_uploaded_file($from, PATH_ROOT . $to)) {
 
                         $data['avatar'] = $to;
-
-                    }else{
+                    } else {
 
                         $_SESSION['errors']['avatar'] = 'Upload không thành công';
-    
+
                         header('Location: ' . url("{$id}/myaccount"));
                         exit;
                     }
@@ -225,15 +210,15 @@ class LoginController extends Controller
                 $this->user->update($id, $data);
 
                 // check exists file in uploads folder
-                if(
+                if (
                     $flagUpload &&
                     $user['avatar'] &&
                     file_exists(PATH_ROOT . $user['avatar'])
-                ){
+                ) {
                     unlink(PATH_ROOT . $user['avatar']);
                 }
 
-                if(isset($_POST['password']) && $_POST['password']){
+                if (isset($_POST['password']) && $_POST['password']) {
                     unset($_SESSION['user']);
                     $_SESSION['error'] = "Vui lòng đăng nhập lại";
                     unset($_SESSION['errors']);
@@ -251,9 +236,7 @@ class LoginController extends Controller
 
                 header('Location: ' . url("{$id}/myaccount"));
                 exit;
-
-                
-            }else{
+            } else {
                 $_SESSION['errors']['email'] = "Email đã tồn tại";
 
                 header('Location: ' . url("{$id}/myaccount"));

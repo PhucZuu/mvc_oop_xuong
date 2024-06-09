@@ -82,7 +82,7 @@ class HomeController extends Controller
     {
         $categories = $this->category->all();
         [$news, $page, $totalPage] = $this->news->paginateListNewsByCategory($_GET['page'] ?? 1, 9, $id);
-        $id_category= $id;
+        $id_category = $id;
 
         $this->renderViewClient('allnews', [
             'categories'  => $categories,

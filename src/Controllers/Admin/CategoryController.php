@@ -18,7 +18,7 @@ class CategoryController extends Controller
     {
         $categories = $this->category->all();
         $this->renderViewAdmin('categories.index', [
-            'categories'=> $categories
+            'categories' => $categories
         ]);
     }
 
@@ -26,7 +26,7 @@ class CategoryController extends Controller
     {
         $categories = $this->category->allDel();
         $this->renderViewAdmin('categories.index', [
-            'categories'=> $categories
+            'categories' => $categories
         ]);
     }
 
@@ -35,35 +35,33 @@ class CategoryController extends Controller
         $validator = new Validator;
         $validator->setMessages([
             'required'   => ':attribute không được để trống',
-            'max'       => 'Tên danh mục không được quá 30 ký tự'
+            'max'        => 'Tên danh mục không được quá 30 ký tự'
         ]);
         $validation = $validator->make($_POST, [
             'category_name' => 'required|max:30',
         ]);
 
         $validation->validate();
-        if ($validation->fails()) 
-        {
+        if ($validation->fails()) {
             $_SESSION['errors'] = $validation->errors()->firstOfAll();
 
             header('Location: ' . url('admin/categories/create'));
             exit();
-        }else{
+        } else {
             $uniqueCategory = $this->category->uniqueCategory($_POST['category_name']);
-            if(!$uniqueCategory)
-            {
+            if (!$uniqueCategory) {
                 $data = [
-                    'category_name'=> $_POST['category_name']
+                    'category_name' => $_POST['category_name']
                 ];
-            }else{
+            } else {
                 $_SESSION['errors']['unique'] = "Category already exist";
-                header('Location: '. url('admin/categories/create'));
+                header('Location: ' . url('admin/categories/create'));
             }
 
             $this->category->insert($data);
             $_SESSION['status'] = true;
             $_SESSION['msg'] = 'Thao tác thành công';
-            header('Location: '. url('admin/categories'));
+            header('Location: ' . url('admin/categories'));
             exit();
         }
     }
@@ -75,19 +73,19 @@ class CategoryController extends Controller
 
     public function show($id)
     {
-       $category = $this->category->findById($id);
+        $category = $this->category->findById($id);
 
-       $this->renderViewAdmin('categories.show', [
-        'category'=> $category
-       ]);
+        $this->renderViewAdmin('categories.show', [
+            'category' => $category
+        ]);
     }
 
     public function edit($id)
     {
         $category = $this->category->findById($id);
-        
+
         $this->renderViewAdmin('categories.edit', [
-            'category'=> $category
+            'category' => $category
         ]);
     }
 
@@ -105,21 +103,20 @@ class CategoryController extends Controller
         ]);
 
         $validation->validate();
-        if ($validation->fails()) 
-        {
+        if ($validation->fails()) {
             $_SESSION['errors'] = $validation->errors()->firstOfAll();
 
             header('Location: ' . url("admin/categories/{$category['id']}/edit"));
             exit();
-        }else{
+        } else {
             $data = [
-                'category_name'=> $_POST['category_name']
+                'category_name' => $_POST['category_name']
             ];
 
             $this->category->update($id, $data);
             $_SESSION['status'] = true;
             $_SESSION['msg'] = 'Thao tác thành công';
-            header('Location: '. url("admin/categories/{$category['id']}/edit"));
+            header('Location: ' . url("admin/categories/{$category['id']}/edit"));
             exit();
         }
     }
@@ -127,7 +124,7 @@ class CategoryController extends Controller
     public function restore($id)
     {
         $this->category->update($id, ["active" => 1]);
-        
+
         $_SESSION['status'] = true;
         $_SESSION['msg'] = 'Khôi phục thành công';
 

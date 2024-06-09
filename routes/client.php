@@ -13,18 +13,12 @@
 
 // HTTP Method: get, post, put (path), delete, option, head
 
-use Admin\XuongOop\Controllers\Client\AboutController;
-use Admin\XuongOop\Controllers\Client\ContactController;
 use Admin\XuongOop\Controllers\Client\HomeController;
 use Admin\XuongOop\Controllers\Client\LoginController;
 use Admin\XuongOop\Controllers\Client\NewsDetailController;
 
 
 $router->get( "/",                  HomeController::class    . '@index');
-$router->get( "/about",             AboutController::class   . '@index');
-
-$router->get( "/contact",           ContactController::class . '@index');
-$router->post( "/contact/store",    ContactController::class . '@store');
 
 $router->get( "/login",             LoginController::class . '@showFormLogin');
 $router->post( "/handle-login",     LoginController::class . '@login');

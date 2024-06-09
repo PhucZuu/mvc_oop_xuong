@@ -17,7 +17,7 @@ class DashboardController extends Controller
     {
         $data = $this->statistic->statisticNewsByCategory();
 
-        
+
         $analyticsNews = array_map(function ($item) {
             return [
                 $item['category_name'],
@@ -27,7 +27,7 @@ class DashboardController extends Controller
         array_unshift($analyticsNews, ['Tên danh mục', 'Số lượng tin tức']);
 
         $this->renderViewAdmin(__FUNCTION__, [
-            "analyticsNews"=> $analyticsNews
+            "analyticsNews" => $analyticsNews
         ]);
     }
 }

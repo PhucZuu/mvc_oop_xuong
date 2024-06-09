@@ -34,7 +34,7 @@ class NewsController extends Controller
     {
         $categories = $this->category->all();
         $this->renderViewAdmin('news.create', [
-            'categories'=> $categories
+            'categories' => $categories
         ]);
     }
 
@@ -62,8 +62,8 @@ class NewsController extends Controller
             $_SESSION['errors'] = $validation->errors()->firstOfAll();
 
             header('Location: ' . url('admin/news/create'));
-        }else{
-            
+        } else {
+
             $data = [
                 'title'         => $_POST['title'],
                 'category_id'   => $_POST['category_id'],
@@ -72,16 +72,15 @@ class NewsController extends Controller
                 'author_id'     => $_SESSION['user']['id'],
             ];
 
-            if (isset($_FILES['news_image']) && $_FILES['news_image']['size'] > 0)
-            {
+            if (isset($_FILES['news_image']) && $_FILES['news_image']['size'] > 0) {
                 $from = $_FILES['news_image']['tmp_name'];
                 $to = 'assets/uploads/' . time() . $_FILES['news_image']['name'];
-                if(move_uploaded_file($from, PATH_ROOT . $to)){
+                if (move_uploaded_file($from, PATH_ROOT . $to)) {
                     $data['news_image'] = $to;
-                }else{
+                } else {
                     $_SESSION['errors']['image'] = "Tải hình ảnh thất bại";
 
-                    header("Location: ". url("admin/news/create"));
+                    header("Location: " . url("admin/news/create"));
                     exit;
                 }
             }
@@ -101,7 +100,7 @@ class NewsController extends Controller
         $news = $this->news->showById($id);
 
         $this->renderViewAdmin('news.show', [
-            'news'=> $news
+            'news' => $news
         ]);
     }
 
@@ -112,15 +111,15 @@ class NewsController extends Controller
         $news = $this->news->findById($id);
 
         $this->renderViewAdmin('news.edit', [
-            'categories'=> $categories,
-            'news'      => $news,
-            'states'    => $states
+            'categories' => $categories,
+            'news'       => $news,
+            'states'     => $states
         ]);
     }
 
     public function update($id)
     {
-        
+
         $news = $this->news->findById($id);
 
         $validator = new Validator;
@@ -137,7 +136,7 @@ class NewsController extends Controller
             $_SESSION['errors'] = $validation->errors()->firstOfAll();
 
             header('Location: ' . url("admin/news/{$id}/edit"));
-        }else{
+        } else {
             $data = [
                 'title'         => $_POST['title'],
                 'category_id'   => $_POST['category_id'],
@@ -147,37 +146,36 @@ class NewsController extends Controller
             ];
 
             $flagUpload = false;
-            if (isset($_FILES['news_image']) && $_FILES['news_image']['size'] > 0)
-            {
+            if (isset($_FILES['news_image']) && $_FILES['news_image']['size'] > 0) {
                 $flagUpload = true;
 
                 $from = $_FILES['news_image']['tmp_name'];
                 $to = 'assets/uploads/' . time() . $_FILES['news_image']['name'];
-                if(move_uploaded_file($from, PATH_ROOT . $to)){
+                if (move_uploaded_file($from, PATH_ROOT . $to)) {
                     $data['news_image'] = $to;
-                }else{
+                } else {
                     $_SESSION['errors']['image'] = "Tải hình ảnh thất bại";
 
-                    header("Location: ". url("admin/news/{$id}/edit"));
+                    header("Location: " . url("admin/news/{$id}/edit"));
                     exit;
                 }
             }
 
-            $this->news->update($id ,$data);
+            $this->news->update($id, $data);
 
-            if( $flagUpload && 
+            if (
+                $flagUpload &&
                 $news['news_image'] &&
-                file_exists(PATH_ROOT . $news['news_image']) )
-            {
+                file_exists(PATH_ROOT . $news['news_image'])
+            ) {
                 unlink(PATH_ROOT . $news['news_image']);
             }
             $_SESSION['status'] = true;
-            $_SESSION['msg'] = 'Cập nhật tin tức thành công';
+            $_SESSION['msg']    = 'Cập nhật tin tức thành công';
 
             header('Location: ' . url("admin/news/{$id}/edit"));
             exit;
         }
-        
     }
 
     public function delete($id)
@@ -186,16 +184,17 @@ class NewsController extends Controller
 
         $this->news->delete($id);
 
-        if( $news["news_image"] &&
+        if (
+            $news["news_image"] &&
             file_exists(PATH_ROOT . $news["news_image"])
-        ){
+        ) {
             unlink(PATH_ROOT . $news["news_image"]);
         }
-        
+
         $_SESSION["status"] = true;
         $_SESSION["msg"] = "Xóa thành công";
 
-        header("Location: ". url("admin/news"));
+        header("Location: " . url("admin/news"));
         exit;
     }
 }
