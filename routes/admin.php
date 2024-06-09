@@ -44,12 +44,15 @@ $router->mount('/admin', function () use ($router) {
         $router->post('/{id}/update', UserController::class . '@update');
         $router->post('/{id}/ban',    UserController::class . '@banAcc');
         $router->post('/{id}/delete', UserController::class . '@delete');
+        $router->post('/{id}/restore',UserController::class . '@restore');
+        $router->get('/listBanned',   UserController::class . '@viewAccBanned');
         
     });
 
     $router->mount('/categories', function () use ($router) {
 
         $router->get('/',                   CategoryController::class . '@index');
+        $router->get('/listDeleted',        CategoryController::class . '@indexDelete');
         $router->get('/create',             CategoryController::class . '@create');
         $router->post('/store',             CategoryController::class . '@store');
         $router->get('/{id}/show',          CategoryController::class . '@show');

@@ -20,4 +20,5 @@ class Statistic extends Model
         ->orderBy('quantityRecord','desc')
         ->fetchAllAssociative();
     }
+
 }

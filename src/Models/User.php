@@ -39,4 +39,14 @@ class User extends Model
         return [$data, $totalPage];
     }
 
+    public function getAllUserBan()
+    {
+        return $this->queryBuilder
+        ->select('*')
+        ->from($this->tableName)
+        ->where('active = ?')
+        ->setParameter(0, 0)
+        ->fetchAllAssociative();
+    }
+
 }

@@ -74,7 +74,27 @@ class UserController extends Controller
 
         $_SESSION['status'] = true;
         $_SESSION['msg'] = 'Thao tác thành công';
-        header('Location: '. url('admin/users'));
+        header('Location: '. url('admin/users/listBanned'));
+        exit();
+    }
+
+    public function viewAccBanned()
+    {
+        $users = $this->user->getAllUserBan();
+        $this->renderViewAdmin('users.index', [
+            'users'=> $users
+        ]);
+    }
+
+    public function restore($id)
+    {
+        $this->user->update($id, [
+            'active' => 1
+        ]);
+
+        $_SESSION['status'] = true;
+        $_SESSION['msg'] = 'Khôi phục thành công';
+        header('Location: '. url('admin/users/listBanned'));
         exit();
     }
 }

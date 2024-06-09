@@ -45,7 +45,8 @@ class NewsController extends Controller
         $validator->setMessages([
             'required' => ':attribute không được để trống',
             'min'      => ':attribute quá ngắn',
-            'max'      => ':attribute không được quá 170 ký tự',
+            'title'    => ':attribute không được quá 70 ký tự',
+            'max'      => ":attribute không được quá 170 ký tự",
             'uploaded_file' => 'Vui lòng chọn ảnh và ảnh không được quá 2MB'
         ]);
         $validation = $validator->make($_POST + $_FILES, [

@@ -54,17 +54,27 @@
                                         <td><?= $user['email'] ?></td>
                                         <td><?= $user['created_at'] ?></td>
                                         <td><?= $user['updated_at'] ?></td>
-                                        <td><?= $user['role'] == 1 ? "Quản trị" : "Người dùng" ?></td>
+                                        <td><?= $user['role'] == 1 ? 'Quản trị' : 'Người dùng' ?></td>
                                         <td>
+                                            @if ($user['active'] == 1)
+                                                <a class="btn btn-info"
+                                                    href="{{ url('admin/users/' . $user['id'] . '/show') }}">Xem</a>
+                                                <a class="btn btn-warning"
+                                                    href="{{ url('admin/users/' . $user['id'] . '/edit') }}">Sửa</a>
 
-                                            <a class="btn btn-info"
-                                                href="{{ url('admin/users/' . $user['id'] . '/show') }}">Xem</a>
-                                            <a class="btn btn-warning"
-                                                href="{{ url('admin/users/' . $user['id'] . '/edit') }}">Sửa</a>
-                                            
-                                            <form class="mt-1" action="{{ url('admin/users/' . $user['id'] . '/delete') }}" method="post">
-                                                <button class="btn btn-danger" onclick="return confirm('Chắc chắn xóa không?')" type="submit">Khóa tài khoản</button>
-                                            </form>
+                                                <form class="mt-1" action="{{ url('admin/users/' . $user['id'] . '/ban') }}" method="post">
+                                                    <button class="btn btn-danger" onclick="return confirm('Chắc chắn xóa không?')" type="submit">Khóa tài khoản</button>
+                                                </form>
+                                            @else
+                                                <form class="mt-1" action="{{ url('admin/users/' . $user['id'] . '/restore') }}" method="post">
+                                                    <button class="btn btn-success" onclick="return confirm('Mở khóa tài khoản này ?')" type="submit">Mở khóa</button>
+                                                </form>
+                                                <form class="mt-1" action="{{ url('admin/users/' . $user['id'] . '/delete') }}" method="post">
+                                                    <button class="btn btn-danger" onclick="return confirm('Xóa tài khoản này vĩnh viễn ?')" type="submit">Xóa</button>
+                                                </form>
+                                            @endif
+
+
 
                                         </td>
                                     </tr>
@@ -75,15 +85,22 @@
                         <div class="row">
                             <div class="d-flex justify-content-center align-items-center">
                                 @php
-                                    for ($i=1; $i <= $totalPage ; $i++) 
-                                    { 
-                                        $class = 'btn-outline-secondary';
-                                        if(isset($_GET['page']) && $_GET['page'] == $i){
-                                            $class = 'btn-secondary';
+                                    if (isset($totalPage)) {
+                                        for ($i = 1; $i <= $totalPage; $i++) {
+                                            $class = 'btn-outline-secondary';
+                                            if (isset($_GET['page']) && $_GET['page'] == $i) {
+                                                $class = 'btn-secondary';
+                                            }
+                                            echo '<a class="mx-1 my-2 btn ' .
+                                                (isset($_GET['page']) ? $class : 'btn-outline-secondary') .
+                                                '" href="' .
+                                                url('admin/users?page=' . $i) .
+                                                '">' .
+                                                $i .
+                                                '</a>';
                                         }
-                                        echo '<a class="mx-1 my-2 btn '.(isset($_GET['page']) ? $class : 'btn-outline-secondary').'" href="'.url('admin/users?page=' . $i).'">'.$i.'</a>';
                                     }
-                                    
+
                                 @endphp
                             </div>
                         </div>

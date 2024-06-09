@@ -22,6 +22,14 @@ class CategoryController extends Controller
         ]);
     }
 
+    public function indexDelete()
+    {
+        $categories = $this->category->allDel();
+        $this->renderViewAdmin('categories.index', [
+            'categories'=> $categories
+        ]);
+    }
+
     public function store()
     {
         $validator = new Validator;

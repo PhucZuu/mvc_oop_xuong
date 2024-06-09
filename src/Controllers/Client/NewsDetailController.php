@@ -19,9 +19,9 @@ class NewsDetailController extends Controller
     }
     public function showNews($id)
     {
+        (new News)->updateViewsNews($id);
         $categories = $this->category->all();
         $news = $this->news->showById($id);
-        
         $date = date('d F Y', strtotime($news['created_at']));
 
         $this->renderViewClient("news_detail", [

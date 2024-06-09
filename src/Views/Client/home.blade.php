@@ -16,19 +16,18 @@
                             <!-- Post Article -->
                             <div class="card__post">
                                 <div class="card__post__body">
-                                    <a href='article-detail-v1.html'>
-                                        <img src="{{ asset('assets/client/images/corona.png') }}" class="img-fluid"
+                                    <a href='{{url("{$news[0]['id']}/news-details")}}'>
+                                        <img src="{{ asset($news[0]['image']) }}" class="img-fluid"
                                             alt="">
                                     </a>
                                     <div class="card__post__content bg__post-cover">
                                         <div class="card__post__category">
-                                            covid-19
+                                            {{$news[0]['category']}}
                                         </div>
                                         <div class="card__post__title">
                                             <h2>
-                                                <a href="#">
-                                                    Global solidarity to fight COVID-19, and indonesia stay safe and
-                                                    health
+                                                <a href='{{url("{$news[0]['id']}/news-details")}}'>
+                                                    {{$news[0]['title']}}
                                                 </a>
                                             </h2>
                                         </div>
@@ -36,12 +35,18 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <a href="#">
-                                                        by david hall
+                                                        by {{$news[0]['author']}}
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
-                                                        Descember 09, 2020
+                                                        @php
+                                                            $formatted_date = date(
+                                                                'd F Y',
+                                                                strtotime($news[0]['created_at']),
+                                                            );
+                                                            echo $formatted_date;
+                                                        @endphp
                                                     </span>
                                                 </li>
                                             </ul>
@@ -53,23 +58,22 @@
                             </div>
                         </div>
 
-
                         <div class="item">
                             <!-- Post Article -->
                             <div class="card__post">
                                 <div class="card__post__body">
-                                    <a href='article-detail-v1.html'>
-                                        <img src="{{ asset('assets/client/images/medium/newsimage1.png') }}"
-                                            class="img-fluid" alt="">
+                                    <a href='{{url("{$news[1]['id']}/news-details")}}'>
+                                        <img src="{{ asset($news[1]['image']) }}" class="img-fluid"
+                                            alt="">
                                     </a>
                                     <div class="card__post__content bg__post-cover">
                                         <div class="card__post__category">
-                                            covid-19
+                                            {{$news[1]['category']}}
                                         </div>
                                         <div class="card__post__title">
                                             <h2>
-                                                <a href="#">
-                                                    meeting room is empty because of the covid-19 virus
+                                                <a href='{{url("{$news[1]['id']}/news-details")}}'>
+                                                    {{$news[1]['title']}}
                                                 </a>
                                             </h2>
                                         </div>
@@ -77,12 +81,18 @@
                                             <ul class="list-inline">
                                                 <li class="list-inline-item">
                                                     <a href="#">
-                                                        by david hall
+                                                        by {{$news[1]['author']}}
                                                     </a>
                                                 </li>
                                                 <li class="list-inline-item">
                                                     <span>
-                                                        Descember 09, 2020
+                                                        @php
+                                                            $formatted_date = date(
+                                                                'd F Y',
+                                                                strtotime($news[1]['created_at']),
+                                                            );
+                                                            echo $formatted_date;
+                                                        @endphp
                                                     </span>
                                                 </li>
                                             </ul>
@@ -103,31 +113,37 @@
                         <!-- Post Article -->
                         <div class="card__post ">
                             <div class="card__post__body card__post__transition">
-                                <a href="#">
-                                    <img src="{{ asset('assets/client/images/newsimage8.png') }}" class="img-fluid"
+                                <a href="{{url("{$news[2]['id']}/news-details")}}">
+                                    <img src="{{ asset($news[2]['image']) }}" class="img-fluid"
                                         alt="">
                                 </a>
                                 <div class="card__post__content bg__post-cover">
                                     <div class="card__post__category">
-                                        politics
+                                        {{$news[2]['category']}}
                                     </div>
                                     <div class="card__post__title">
                                         <h5>
-                                            <a href="#">
-                                                Barack Obama and Family Visit borobudur temple enjoy holiday
-                                                indonesia.</a>
+                                            <a href="{{url("{$news[2]['id']}/news-details")}}">
+                                                {{$news[2]['title']}}
+                                            </a>
                                         </h5>
                                     </div>
                                     <div class="card__post__author-info">
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a href="#">
-                                                    by david hall
+                                                    by {{$news[2]['author']}}
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <span>
-                                                    Descember 09, 2020
+                                                    @php
+                                                        $formatted_date = date(
+                                                            'd F Y',
+                                                            strtotime($news[2]['created_at']),
+                                                        );
+                                                        echo $formatted_date;
+                                                    @endphp
                                                 </span>
                                             </li>
                                         </ul>
@@ -141,30 +157,37 @@
                         <!-- Post Article -->
                         <div class="card__post ">
                             <div class="card__post__body card__post__transition">
-                                <a href="#">
-                                    <img src="{{ asset('assets/client/images/medium/newsimage2.png') }}" class="img-fluid"
+                                <a href="{{url("{$news[3]['id']}/news-details")}}">
+                                    <img src="{{ asset($news[3]['image']) }}" class="img-fluid"
                                         alt="">
                                 </a>
                                 <div class="card__post__content bg__post-cover">
                                     <div class="card__post__category">
-                                        politics
+                                        {{$news[3]['category']}}
                                     </div>
                                     <div class="card__post__title">
                                         <h5>
-                                            <a href="#">
-                                                A classic and sturdy building with history.</a>
+                                            <a href="{{url("{$news[3]['id']}/news-details")}}">
+                                                {{$news[3]['title']}}
+                                            </a>
                                         </h5>
                                     </div>
                                     <div class="card__post__author-info">
                                         <ul class="list-inline">
                                             <li class="list-inline-item">
                                                 <a href="#">
-                                                    by david hall
+                                                    by {{$news[3]['author']}}
                                                 </a>
                                             </li>
                                             <li class="list-inline-item">
                                                 <span>
-                                                    Descember 09, 2020
+                                                    @php
+                                                        $formatted_date = date(
+                                                            'd F Y',
+                                                            strtotime($news[3]['created_at']),
+                                                        );
+                                                        echo $formatted_date;
+                                                    @endphp
                                                 </span>
                                             </li>
                                         </ul>
@@ -301,7 +324,7 @@
 
 
 @section('pagination')
-    <a href="?page=1">
+    <a href="{{url("page/?page=1")}}">
         «
     </a>
 
@@ -309,11 +332,11 @@
         $startPage = max(1, $page -1);
         $endPage = min($totalPage, $page + 1);
         for ($i = $startPage; $i <= $endPage; $i++) {
-            echo '<a class="' .(isset($_GET['page']) ? ($_GET['page'] == $i ? 'active' : '') : ($i == 1 && !isset($_GET['page']) ? 'active' : '')) .'" href='.url("?page=$i").'>' . $i . '</a>';
+            echo '<a class="' .(isset($_GET['page']) ? ($_GET['page'] == $i ? 'active' : '') : ($i == 1 && !isset($_GET['page']) ? 'active' : '')) .'" href='.url("page/?page=$i").'>' . $i . '</a>';
         }
     @endphp
 
-    <a href="?page=<?= $totalPage?>">
+    <a href="{{url("page/?page=$totalPage")}}">
         »
     </a>
 @endsection

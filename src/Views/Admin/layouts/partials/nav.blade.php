@@ -40,6 +40,7 @@
             <ul>
                 <li><a class="active" href="{{ url('admin/categories/') }}">Danh sách</a></li>
                 <li><a href="{{ url('admin/categories/create') }}">Thêm</a></li>
+                <li><a href="{{ url('admin/categories/listDeleted') }}">Đã xóa</a></li>
             </ul>
         </li>
 
@@ -56,14 +57,17 @@
             </ul>
         </li>
 
-
-        <li class>
-            <a href="{{ url('admin/users/') }}" aria-expanded="false">
+        <li class="mm-active">
+            <a class="has-arrow" href="#" aria-expanded="false">
                 <div class="icon_menu">
                     <img src="{{ asset('assets/admin/img/menu-icon/user.svg') }}" alt>
                 </div>
                 <span>Người dùng</span>
             </a>
+            <ul>
+                <li><a class="active" href="{{ url('admin/users/') }}">Danh sách</a></li>
+                <li><a href="{{ url('admin/users/listBanned') }}">Tài khoản khóa</a></li>
+            </ul>
         </li>
 
         <li class>

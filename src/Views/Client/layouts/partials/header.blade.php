@@ -62,15 +62,13 @@
                             <a class="nav-link active dropdown-toggle" href="#" data-toggle="dropdown"> Tài khoản </a>
                             @if (isset($_SESSION['user']))
                                 <ul class="dropdown-menu dropdown-menu-left">
-                                    <li><a class='dropdown-item' href='about-us-v1.html'> Cài đặt </a></li>
-                                </ul>
-                                <ul class="dropdown-menu dropdown-menu-left">
-                                    <li><a class='dropdown-item' href='about-us-v1.html'> Đăng xuất </a></li>
+                                    <li><a class='dropdown-item' href='{{ url("{$_SESSION['user']['id']}/myaccount") }}'> Cài đặt </a></li>
+                                    <li><a class='dropdown-item' href='{{ url('logout') }}'> Đăng xuất </a></li>
                                 </ul>
                             @else
                                 <ul class="dropdown-menu dropdown-menu-left">
-                                    <li><a class='dropdown-item' href='about-us-v1.html'> Đăng nhập </a></li>
-                                    <li><a class='dropdown-item' href='about-us-v1.html'> Đăng ký </a></li>
+                                    <li><a class='dropdown-item' href='{{ url('login') }}'> Đăng nhập </a></li>
+                                    <li><a class='dropdown-item' href='{{ url('register') }}'> Đăng ký </a></li>
                                 </ul>  
                             @endif
 
@@ -81,12 +79,12 @@
                             @if (isset($categories))
                                 <ul class="dropdown-menu dropdown-menu-left">
                                     @foreach ($categories as $category)
-                                        <li><a class='dropdown-item' href='#'> {{$category['category_name']}} </a></li>
+                                        <li><a class='dropdown-item' href='{{url("allnews/{$category['id']}/category")}}'> {{$category['category_name']}} </a></li>
                                     @endforeach
                                 </ul>
                             @endif
                         </li>
-                        <li class="nav-item"><a class='nav-link' href='contact.html'> Liên hệ </a></li>
+                        <li class="nav-item"><a class='nav-link' href='{{ url('allnews') }}'> Tin tức </a></li>
                     </ul>
 
 
@@ -101,18 +99,16 @@
                     <div class="top-search navigation-shadow">
                         <div class="container">
                             <div class="input-group ">
-                                <form action="#">
+                                <form action="{{ url("result/") }}" method="POST">
 
                                     <div class="row no-gutters mt-3">
                                         <div class="col">
                                             <input class="form-control border-secondary border-right-0 rounded-0"
-                                                type="search" value="" placeholder="Search "
+                                                type="search" placeholder="Search" name="search" value=""
                                                 id="example-search-input4">
                                         </div>
                                         <div class="col-auto">
-                                            <a class='btn btn-outline-secondary border-left-0 rounded-0 rounded-right' href='search-result.html'>
-                                                <i class="fa fa-search"></i>
-                                            </a>
+                                            <button type="submit" class='btn btn-outline-secondary border-left-0 rounded-0 rounded-right'><i class="fa fa-search"></i></button>
                                         </div>
                                     </div>
 

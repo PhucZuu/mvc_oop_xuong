@@ -69,9 +69,7 @@
                             <div class="profile_info_details">
                                 <a href="#">My Profile </a>
                                 <a href="#">Settings</a>
-                                <form action="{{ url('logout') }}" method="post">
-                                    <input type="submit" value="Log Out">
-                                </form>
+                                <a href="{{url('logout')}}">Log Out</a>
                             </div>
                         </div>
                     </div>

@@ -18,4 +18,14 @@ class Category extends Model
                ->fetchAssociative();
     }
 
+    public function allDel()
+    {
+        return $this->queryBuilder
+        ->select('*')
+        ->from($this->tableName)
+        ->where('active = ?')
+        ->setParameter(0, 0)
+        ->fetchAllAssociative();
+    }
+
 }
